@@ -14,8 +14,26 @@ def pull_data(ticker, interval = 1440):
 	'''
 	Pulls data for different cryptos from Kraken API.
 	Interval is on per minute basis, but function defaults to daily prices
+	
+	=========
+	ARGUMENTS:
+	=========
+	ticker: str, ticker for whichever token you want to pull, assuming it's listed on Kraken
+	interval: int, defaulted for daily prices (1440 / 60) = 24 hours
+
+	=======
+	RETURNS
+	=======
+	Pandas data frame for ticker passed into function.
+
+	======
+	RAISES
+	======
+	ValueError if ticker or interval are invalid values
+	ImportError if libraries not installed or imported
+
 	'''
-	ticker_str = '_'+str(ticker)
+	ticker_str = '_'+str(ticker.upper())
 
 	ticker, last = k.get_ohlc_data(str(ticker)+'USD', interval)
 
@@ -53,4 +71,5 @@ def merge_data(dfs):
 	return df_merged
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__": 
+	main()
